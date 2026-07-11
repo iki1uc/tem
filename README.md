@@ -1,17 +1,13 @@
 # TEM – Zeit Root
 
 TEM ist die Zeit‑Wurzel des 3hit90‑Systems.  
-Während **[SYS](ca://s?q=SYS_Root_erklaeren)** die Struktur definiert,  
-bestimmt TEM die **Zeit‑Sequenz**, die **Historie**, die **Zukunft** und die
-zeitliche Einbettung aller Module und Geometrien.
+Während **[SYS](ca://s?q=SYS_Root_erklaeren)** die Struktur hält, erzeugt TEM die **Bewegung** im System:
 
-TEM ist der Quadrant, der entscheidet:
+- Vergangenheit (**reCALL**)  
+- Gegenwart (**TIME**)  
+- Zukunft (**reFINAL**)  
 
-- Was war? (**reCALL**)  
-- Was ist? (**TIME**)  
-- Was wird? (**reFINAL**)  
-
-TEM ist damit der **Zeit‑Anker** des gesamten Systems.
+TEM ist der Quadrant, der bestimmt, **wann** ein Move richtig oder falsch war.
 
 ---
 
@@ -22,27 +18,26 @@ TEM definiert:
 - Zeit‑Ordnung  
 - Zeit‑Sequenzen  
 - Zeit‑Raster  
-- Historische Moves  
-- Zukunfts‑Moves  
-- Zeit‑Interpretation der Geometrie  
-- Zeit‑Interpretation der Business‑Module  
-- Zeit‑Operatoren
+- historische Moves  
+- zukünftige Moves  
+- zeitliche Geometrie‑Interpretation  
+- zeitliche Business‑Interpretation  
+- Operator‑Zeitlogik
 
-TEM ist der Quadrant, der die **Bewegung** im System erzeugt.
+TEM ist der **Zeit‑Anker** des Root‑Quadranten‑Systems.
 
 ---
 
 ## Zeit‑Module
 
 ### **[TIME](ca://s?q=TIME_Ordner_erklaeren)** – 3×11 Raster  
-Das Zeit‑Raster des Systems.  
 Scroll + Zoom → Zeit‑Felder.
 
 ### reCALL – Historie  
-Vergangene Moves, vergangene LAGE, vergangene Markt‑Orbit‑Zustände.
+Vergangene LAGE, vergangene Markt‑Orbit‑Zustände, vergangene Business‑Moves.
 
 ### reFINAL – Zukunft  
-Zukünftige Moves, zukünftige LAGE, zukünftige Markt‑Orbit‑Zustände.
+Zukünftige LAGE, zukünftige Markt‑Orbit‑Zustände, zukünftige Business‑Moves.
 
 TEM verbindet alle drei Zeit‑Module zu einem **Zeit‑Kern**.
 
@@ -59,12 +54,12 @@ TEM interpretiert die vier Geo‑Systeme zeitlich:
 
 Beispiele:
 
-- *Mercedes → Chrysler* (TΩ‑Fehlfusion in der Zeit)  
+- *Mercedes → Chrysler* (TΩ‑Fehlfusion über Zeit sichtbar)  
 - *BMW → Mini / Rolls‑Royce* (XU‑Zeit‑Achsen)  
 - *VW → Audi / Porsche / Skoda / ID* (Φ4‑Zeit‑Familie)  
 - *Mercedes → AMG / EQ / G / Maybach* (O12‑Zeit‑Fusion)
 
-TEM zeigt, **wann** ein Move richtig oder falsch war.
+TEM zeigt, **wann** ein Move stabil oder instabil war.
 
 ---
 
@@ -110,8 +105,7 @@ TEM ist einer der vier Root‑Quadranten:
 - **[ID](ca://s?q=ID_Root_erklaeren)** – Identität  
 - **[OP](ca://s?q=Operator_Root_erklaeren)** – Operator
 
-TEM ist der Quadrant, der die **Bewegung** erzeugt,  
-während SYS die **Struktur** hält.
+TEM erzeugt die **Bewegung**, SYS hält die **Struktur**.
 
 ---
 
