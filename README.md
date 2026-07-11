@@ -110,4 +110,36 @@ TEM erzeugt die **Bewegung**, SYS hält die **Struktur**.
 ---
 
 ## Dateien im TEM‑Repository
+tem/
+README.md          ← diese Datei
+index.html         ← TEM ROOT Page
+ID.html            ← Zeit-Identität
+plus/minus(sys(tem)+/-).html ← Operator-Logik
+
+Code
+
+---
+
+## Status
+
+TEM = ACTIVE
+TIME = ACTIVE
+reCALL = ACTIVE
+reFINAL = ACTIVE
+
+GEO  = TΩ + XU + Φ4 + O12
+BUS  = LAGE + MARKT + BÖRSE + BRM
+OP   = plus/minus(sys(tem)+/-)
+ROOT = SYS + TEM + ID + OP
+
+Code
+
+---
+
+## Weiterentwicklung
+
+- **[TEM Kernel bauen](ca://s?q=TEM_Kernel_bauen)**  
+- **[TIME Raster erweitern](ca://s?q=TIME_Raster_verbessern)**  
+- **[O12 Zeit-Fusion erklären](ca://s?q=O12_Zeit_Fusion_erklaeren)**  
+- **[Φ4 Zeit-Achsen erzeugen](ca://s?q=Phi4_Zeit_Achsen_erzeugen)**  
 
