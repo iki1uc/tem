@@ -4,13 +4,31 @@
     "TIME": "Gegenwart",
     "reFINAL": "Zukunft",
 
-    "modules": {
-      "deviceSync": true,
-      "hhRoutingTime": true,
-      "run8Timing": true,
-      "vipiioFrameTiming": true,
-      "symRefresh": true,
-      "ncVectorTime": true
+    "engine": {
+      "deviceSync": {
+        "active": true,
+        "desc": "Synchronisiert PQ/PX/PR zeitlich"
+      },
+      "hhRoutingTime": {
+        "active": true,
+        "desc": "HH nur im Desktop-Zeitfenster"
+      },
+      "run8Timing": {
+        "active": true,
+        "desc": "Vector-Start nur im TEM-Slot"
+      },
+      "vipiioFrameTiming": {
+        "active": true,
+        "desc": "PX-Frame-Takt für viPIio"
+      },
+      "symRefresh": {
+        "active": true,
+        "desc": "SYM-Symbole aktualisieren bei Zeitwechsel"
+      },
+      "ncVectorTime": {
+        "active": true,
+        "desc": "NC-Vector nur im TEM-Fenster"
+      }
     }
   }
 }
