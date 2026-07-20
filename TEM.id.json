@@ -1,0 +1,16 @@
+{
+  "TEM": {
+    "reCALL": "Vergangenheit",
+    "TIME": "Gegenwart",
+    "reFINAL": "Zukunft",
+
+    "modules": {
+      "deviceSync": true,
+      "hhRoutingTime": true,
+      "run8Timing": true,
+      "vipiioFrameTiming": true,
+      "symRefresh": true,
+      "ncVectorTime": true
+    }
+  }
+}
