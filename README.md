@@ -1,145 +1,135 @@
-# TEM – Zeit Root
+TEM ist die Zeit‑Wurzel des 3hit90‑Systems.
+Während SYS die Struktur hält, erzeugt TEM die Bewegung im System.
 
-TEM ist die Zeit‑Wurzel des 3hit90‑Systems.  
-Während **[SYS](ca://s?q=SYS_Root_erklaeren)** die Struktur hält, erzeugt TEM die **Bewegung** im System:
+GEO ist die geometrische Modular‑Ebene,
+die TEM zeitlich interpretiert.
 
-- Vergangenheit (**reCALL**)  
-- Gegenwart (**TIME**)  
-- Zukunft (**reFINAL**)  
+🧊 GEO‑Module (modular, korrekt)
+1) TΩ – Zeit‑Fusion
+Fusionen über Zeit, sichtbar als:
 
-TEM ist der Quadrant, der bestimmt, **wann** ein Move richtig oder falsch war.
+Fehlfusion
 
----
+Überfusion
 
-## Aufgabe von TEM
+Unterfusion
 
-TEM definiert:
+Zeit‑Drift
 
-- Zeit‑Ordnung  
-- Zeit‑Sequenzen  
-- Zeit‑Raster  
-- historische Moves  
-- zukünftige Moves  
-- zeitliche Geometrie‑Interpretation  
-- zeitliche Business‑Interpretation  
-- Operator‑Zeitlogik
+2) XU – Zeit‑Achsen
+Kreuz‑Achsen über Zeit:
 
-TEM ist der **Zeit‑Anker** des Root‑Quadranten‑Systems.
+X‑Achse (horizontal)
 
----
+U‑Achse (vertikal)
 
-## Zeit‑Module
+Kreuzpunkt = Zeit‑Entscheidung
 
-### **[TIME](ca://s?q=TIME_Ordner_erklaeren)** – 3×11 Raster  
-Scroll + Zoom → Zeit‑Felder.
+3) Φ4 – Zeit‑Familien
+Vier Achsenfamilien über Zeit:
 
-### reCALL – Historie  
-Vergangene LAGE, vergangene Markt‑Orbit‑Zustände, vergangene Business‑Moves.
+Φ1
 
-### reFINAL – Zukunft  
-Zukünftige LAGE, zukünftige Markt‑Orbit‑Zustände, zukünftige Business‑Moves.
+Φ2
 
-TEM verbindet alle drei Zeit‑Module zu einem **Zeit‑Kern**.
+Φ3
 
----
+Φ4
 
-## Geometrie‑Integration
+→ Zeit‑Cluster
 
-TEM interpretiert die vier Geo‑Systeme zeitlich:
+4) O12 – 12D‑Zeit‑Fusion
+Zwölf Zeit‑Dimensionen:
 
-- **[TΩ](ca://s?q=T_Omega_System_erklaeren)** → Fusionen über Zeit  
-- **[XU](ca://s?q=XU_System_erklaeren)** → Achsen‑Kreuz über Zeit  
-- **[Φ4](ca://s?q=Phi4_System_erklaeren)** → Achsenfamilien über Zeit  
-- **[O12](ca://s?q=O12_System_erklaeren)** → 12D‑Zeit‑Fusion
+3D Raum
 
-Beispiele:
+3D Zeit
 
-- *Mercedes → Chrysler* (TΩ‑Fehlfusion über Zeit sichtbar)  
-- *BMW → Mini / Rolls‑Royce* (XU‑Zeit‑Achsen)  
-- *VW → Audi / Porsche / Skoda / ID* (Φ4‑Zeit‑Familie)  
-- *Mercedes → AMG / EQ / G / Maybach* (O12‑Zeit‑Fusion)
+3D Orbit
 
-TEM zeigt, **wann** ein Move stabil oder instabil war.
+3D Operator
 
----
+→ ergibt 12D‑Zeit‑Fusion
 
-## Business‑Integration
+🧊 Warum GEO modular ist
+Weil TEM die Zeit liefert,
+und GEO die Form,
+und beide zusammen die Bewegung erzeugen.
 
-TEM interpretiert:
+Darum:
 
-- **LAGE** über Zeit  
-- **MARKT** über Zeit  
-- **BÖRSE** über Zeit  
-- **BRM** über Zeit
+TEM
+=
+Zeit
+GEO
+=
+Form
+TEM
+×
+GEO
+=
+Bewegung
+🧊 Die 6E korrekt verteilt (modular)
+TET‑3E (Bewegung / +T)
+ESSO
 
-Beispiel:
+ROLLER
 
-- Chrysler hatte **LAGE↓** über Zeit  
-- Mercedes hatte **LAGE↑** über Zeit  
-→ TΩ‑Fehlfusion sichtbar
+KASSE
 
----
+RIZ‑3E (Gegenbewegung / −T)
+DOOR
 
-## Operator‑Integration
+DOO
 
-TEM nutzt:
+SHELL
 
-- **[OP](ca://s?q=Operator_Root_erklaeren)** – plus/minus(sys(tem)+/-)
+Diese 6E fallen komplett auf TEM,
+weil TEM die diagonale Mitte ist.
 
-Operatoren bestimmen:
-
-- Zeit‑Addition  
-- Zeit‑Subtraktion  
-- Zeit‑Kreuz  
-- Zeit‑Orbit  
-- Zeit‑Börsen‑Kontext
-
----
-
-## Verbindung zu SYS, ID, OP
-
-TEM ist einer der vier Root‑Quadranten:
-
-- **[SYS](ca://s?q=SYS_Root_erklaeren)** – Struktur  
-- **TEM** – Zeit  
-- **[ID](ca://s?q=ID_Root_erklaeren)** – Identität  
-- **[OP](ca://s?q=Operator_Root_erklaeren)** – Operator
-
-TEM erzeugt die **Bewegung**, SYS hält die **Struktur**.
-
----
-
-## Dateien im TEM‑Repository
-tem/
-README.md          ← diese Datei
-index.html         ← TEM ROOT Page
-ID.html            ← Zeit-Identität
-plus/minus(sys(tem)+/-).html ← Operator-Logik
-
+🧊 Die 3‑6‑9‑Teilung (modular, korrekt)
 Code
+SYS oben = 3E
+TEM mitte = 6E
+SYS unten = 9E
 
----
+(((SYS3))) TEM6 (((SYS9)))
+SYS hält Struktur.
+TEM erzeugt Bewegung.
+ID hält Identität.
+OP hält Operatoren.
 
-## Status
+🧊 GEO modular in TEM (final)
+TΩ → Zeit‑Fusion
+XU → Zeit‑Achsen
+Φ4 → Zeit‑Familien
+O12 → Zeit‑Fusion 12D
+Diese vier GEO‑Module werden in TEM zeitlich interpretiert,
+und bilden die GEO‑Modular‑Ebene.
 
-TEM = ACTIVE
-TIME = ACTIVE
-reCALL = ACTIVE
-reFINAL = ACTIVE
+🧊 Dateien (korrekt modular)
+README.md – diese Datei
 
-GEO  = TΩ + XU + Φ4 + O12
-BUS  = LAGE + MARKT + BÖRSE + BRM
-OP   = plus/minus(sys(tem)+/-)
-ROOT = SYS + TEM + ID + OP
+index.html – TEM Root
 
-Code
+ID.html – Zeit‑Identität
 
----
+plus/minus(sys(tem)+/-).html – Operator
 
-## Weiterentwicklung
+ESSO.js – Startimpuls
 
-- **[TEM Kernel bauen](ca://s?q=TEM_Kernel_bauen)**  
-- **[TIME Raster erweitern](ca://s?q=TIME_Raster_verbessern)**  
-- **[O12 Zeit-Fusion erklären](ca://s?q=O12_Zeit_Fusion_erklaeren)**  
-- **[Φ4 Zeit-Achsen erzeugen](ca://s?q=Phi4_Zeit_Achsen_erzeugen)**  
+ROLLER.js – Transport
 
+KASSE.js – Abschluss
+
+YxY.js – RIZ‑Ausweg
+
+TEM6D.matrix.js – 6E‑Matrix
+
+TEM6D.root.js – 6E‑Root
+
+tic.js – TIME_PIPELINE
+
+TEM.id.json – Zeit‑ID
+
+routing.js – Zeit‑Routing
