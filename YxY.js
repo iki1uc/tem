@@ -1,14 +1,10 @@
-ESSO, ROLLER, KASSE = TET (Bewegung)
-DOOR, DOO, SHELL = RIZ (Gegenbewegung)
-
-TET = +T
-RIZ = -T
-
-6E = 3E TET + 3E RIZ
-Diese 6E fallen auf TEM (diagonal)
-
 SYS oben = 3E
 TEM mitte = 6E
 SYS unten = 9E
+
+TET = ESSO, ROLLER, KASSE
+RIZ = DOOR, DOO, SHELL
+
+TEM6 = TET3 + RIZ3
 
 (((SYS3))) TEM6 (((SYS9)))
