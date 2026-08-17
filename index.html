@@ -2,115 +2,730 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>TEM – Zeit Root (Modular GEO + 6E Engine)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TEM · Zeit Root · 6E Engine · GEO Modular</title>
 
 <style>
-body { background:#000; color:#0f0; font-family:Consolas, monospace; padding:20px; }
-h1, h2 { color:#6cf; }
-a { color:#6cf; display:block; margin:10px 0; font-size:18px; }
-hr { border:1px solid #333; margin:25px 0; }
-pre { background:#111; padding:12px; border:1px solid #333; }
-#hh-panel { margin-top:20px; padding:12px; border:1px solid #333; }
+:root {
+    --bg: #0a0a12;
+    --fg: #0f0;
+    --gold: #ffd700;
+    --tet: #6bff6b;
+    --riz: #ffd93d;
+    --geo: #6b6bff;
+    --tem: #ff6b6b;
+    --time: #4ff;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Consolas', monospace;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 6px;
+    padding: 10px;
+    overflow: hidden;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 6px;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+header h1 {
+    font-size: 16px;
+    color: var(--gold);
+    letter-spacing: 3px;
+}
+header h1 .tem { color: var(--tem); }
+header h1 .geo { color: var(--geo); }
+header h1 .time { color: var(--time); }
+#info-bar { font-size: 9px; color: #666; display: flex; gap: 8px; align-items: center; }
+
+main {
+    display: grid;
+    grid-template-columns: 3fr 1.2fr;
+    gap: 6px;
+    height: 100%;
+    min-height: 0;
+}
+
+#canvas-wrap {
+    background: #0a0a0f;
+    border: 1px solid #1a1a2a;
+    border-radius: 10px;
+    padding: 6px;
+    position: relative;
+    overflow: hidden;
+}
+#canvas-wrap canvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    display: block;
+}
+#canvas-overlay {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    font-size: 7px;
+    color: #444;
+    pointer-events: none;
+    background: rgba(0,0,0,0.7);
+    padding: 3px 8px;
+    border-radius: 3px;
+}
+#canvas-overlay .zeit { color: var(--time); }
+
+#panel {
+    background: #0a0a0f;
+    border: 1px solid #1a1a2a;
+    border-radius: 10px;
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    overflow-y: auto;
+    max-height: 100%;
+}
+#panel h3 { font-size: 9px; color: #666; border-bottom: 1px solid #1a1a2a; padding-bottom: 3px; }
+
+#modules {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3px;
+}
+.mod {
+    background: rgba(255,255,255,0.02);
+    border-radius: 6px;
+    padding: 4px 6px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.04);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.mod:hover {
+    border-color: var(--gold);
+    background: rgba(255,215,61,0.05);
+}
+.mod .sym { font-size: 14px; display: block; }
+.mod .label { color: #666; font-size: 5px; text-transform: uppercase; letter-spacing: 1px; }
+.mod .desc { color: #444; font-size: 4px; }
+.mod.active { border-color: var(--gold); background: rgba(255,215,61,0.08); }
+
+#log {
+    flex: 1;
+    overflow-y: auto;
+    font-size: 7px;
+    color: #6a6a8a;
+    line-height: 1.3;
+    min-height: 30px;
+    max-height: 60px;
+    background: #06060a;
+    border-radius: 4px;
+    padding: 3px 5px;
+}
+#log .entry { padding: 1px 0; border-bottom: 1px solid #0a0a12; }
+#log .time { color: #444; }
+#log .msg.tet { color: var(--tet); }
+#log .msg.riz { color: var(--riz); }
+#log .msg.geo { color: var(--geo); }
+#log .msg.tem { color: var(--tem); }
+#log .msg.zeit { color: var(--time); }
+
+#metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 2px;
+}
+.metric {
+    background: #0e0e1a;
+    border-radius: 3px;
+    padding: 2px 3px;
+    text-align: center;
+    border: 1px solid #1a1a2a;
+}
+.metric .label { color: #666; font-size: 5px; text-transform: uppercase; }
+.metric .value { font-size: 9px; font-weight: bold; }
+.metric.tet .value { color: var(--tet); }
+.metric.riz .value { color: var(--riz); }
+.metric.geo .value { color: var(--geo); }
+.metric.tem .value { color: var(--tem); }
+
+#controls {
+    display: flex;
+    gap: 2px;
+    flex-wrap: wrap;
+}
+button {
+    background: #111;
+    color: var(--fg);
+    border: 1px solid #333;
+    padding: 3px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 8px;
+    transition: all 0.2s;
+}
+button:hover { background: #1a1a2a; border-color: var(--gold); }
+button:active { transform: scale(0.95); }
+button.primary { border-color: var(--gold); color: var(--gold); }
+button.primary:hover { background: var(--gold); color: #000; }
+button.tet { border-color: var(--tet); color: var(--tet); }
+button.tet:hover { background: var(--tet); color: #000; }
+button.riz { border-color: var(--riz); color: var(--riz); }
+button.riz:hover { background: var(--riz); color: #000; }
+button.geo { border-color: var(--geo); color: var(--geo); }
+button.geo:hover { background: var(--geo); color: #000; }
+button.tem { border-color: var(--tem); color: var(--tem); }
+button.tem:hover { background: var(--tem); color: #000; }
+button.danger { border-color: #f44; color: #f44; }
+button.danger:hover { background: #f44; color: #000; }
+
+@media (max-width: 800px) {
+    main { grid-template-columns: 1fr; }
+    #panel { max-height: 180px; }
+    #modules { grid-template-columns: 1fr 1fr; }
+}
 </style>
-
-<!-- Routing -->
-<script src="routing.js"></script>
-
-<!-- TEM6D Engine -->
-<script src="TEM6D.matrix.js"></script>
-<script src="TEM6D.root.js"></script>
-<script src="tic.js"></script>
-
-<!-- SYS Analyse -->
-<script src="SYS.station.analyze.js"></script>
-
 </head>
 <body>
 
-<h1>TEM – Zeit Root (Modular)</h1>
-<p>TEM = Zeit‑Engine des 3hit90‑Systems</p>
+<header>
+    <h1>
+        <span class="tem">⏳ TEM</span>
+        <span style="color:#666;">·</span>
+        <span class="geo">🌐 GEO</span>
+        <span style="color:#666;">·</span>
+        <span class="time">🕐 6E</span>
+        <span style="color:#666;">·</span>
+        <span style="color:var(--gold);">ZEIT ROOT</span>
+    </h1>
+    <div id="info-bar">
+        <span id="clock">⏱️ --:--:--</span>
+        <span id="state-display" style="color:var(--gold);">● bereit</span>
+        <span id="cycle-display" style="color:#666;">ZEIT 0</span>
+    </div>
+</header>
 
-<hr>
+<main>
+    <div id="canvas-wrap">
+        <canvas id="temCanvas"></canvas>
+        <div id="canvas-overlay">
+            <span class="zeit">⏳</span> TEM · Zeit Root · GEO Modular · 6E
+        </div>
+    </div>
 
-<h2>Root‑Quadranten</h2>
-<a href="https://iki1uc.github.io/3hit90/index.html">SYS.index</a>
-<a href="ID.html">ID Root</a>
-<a href="plus/minus(sys(tem)+/-).html">OP Root</a>
-<a href="TEM.id.json">TEM.id.json</a>
+    <div id="panel">
+        <h3>⏳ TEM · 6E · GEO</h3>
 
-<hr>
+        <div id="modules">
+            <div class="mod active" data-mod="TET">
+                <span class="sym">▶</span>
+                <span class="label">TET</span>
+                <span class="desc">+T Bewegung</span>
+            </div>
+            <div class="mod" data-mod="RIZ">
+                <span class="sym">◀</span>
+                <span class="label">RIZ</span>
+                <span class="desc">-T Gegenbewegung</span>
+            </div>
+            <div class="mod" data-mod="GEO">
+                <span class="sym">🌐</span>
+                <span class="label">GEO</span>
+                <span class="desc">TΩ·XU·Φ4·O12</span>
+            </div>
+        </div>
 
-<h2>GEO – Modular</h2>
-<pre>
-TΩ  = Zeit‑Fusion
-XU  = Zeit‑Achsen
-Φ4  = Zeit‑Familien
-O12 = 12D‑Zeit‑Fusion
-</pre>
+        <div id="metrics">
+            <div class="metric tet"><div class="label">TET</div><div class="value" id="tet-value">0</div></div>
+            <div class="metric riz"><div class="label">RIZ</div><div class="value" id="riz-value">0</div></div>
+            <div class="metric geo"><div class="label">GEO</div><div class="value" id="geo-value">0</div></div>
+            <div class="metric tem"><div class="label">TEM</div><div class="value" id="tem-value">0</div></div>
+        </div>
 
-<hr>
+        <div id="log">
+            <div class="entry"><span class="time">[INIT]</span> <span class="msg zeit">⏳ TEM · Zeit Root · GEO Modular</span></div>
+            <div class="entry"><span class="time">[INIT]</span> <span class="msg tet">TET (+T): ESSO · ROLLER · KASSE</span></div>
+            <div class="entry"><span class="time">[INIT]</span> <span class="msg riz">RIZ (-T): DOOR · DOO · SHELL</span></div>
+            <div class="entry"><span class="time">[INIT]</span> <span class="msg geo">GEO: TΩ · XU · Φ4 · O12</span></div>
+        </div>
 
-<h2>TEM – 6E Zeit‑Bewegung</h2>
-<pre>
-TET (+T):
-  ESSO   – Startimpuls
-  ROLLER – Transport
-  KASSE  – Abschluss
-
-RIZ (−T):
-  DOOR   – Öffnung
-  DOO    – Abfluss
-  SHELL  – Stabilisierung
-
-TEM6 = TET3 + RIZ3
-(((SYS3))) TEM6 (((SYS9)))
-</pre>
-
-<hr>
-
-<h2>HH – Host‑Hub Panel</h2>
-<div id="hh-panel">Lade Routing…</div>
-
-<hr>
-
-<h2>TEM Info</h2>
-<pre id="tem-info">Lade TEM Daten…</pre>
+        <div id="controls">
+            <button class="primary" id="btn-start">▶ START</button>
+            <button class="tet" id="btn-tet">▶ TET</button>
+            <button class="riz" id="btn-riz">◀ RIZ</button>
+            <button class="geo" id="btn-geo">🌐 GEO</button>
+            <button class="tem" id="btn-tem">⏳ TEM</button>
+            <button class="danger" id="btn-reset">⟲ RESET</button>
+            <button id="btn-auto">▶ AUTO</button>
+        </div>
+    </div>
+</main>
 
 <script>
-// TEM.id.json laden
-fetch("TEM.id.json")
-    .then(r => r.json())
-    .then(data => {
-        document.getElementById("tem-info").innerText =
-            JSON.stringify(data, null, 4);
-    })
-    .catch(() => {
-        document.getElementById("tem-info").innerText =
-            "Fehler: TEM.id.json konnte nicht geladen werden.";
-    });
-</script>
+// ============================================================
+// TEM · ZEIT ROOT · 6E ENGINE · GEO MODULAR
+// ============================================================
 
-<hr>
+// --- TET (+T) ---
+var TET = {
+    ESSO:   { name: 'ESSO',   role: 'Startimpuls', drive: '+T', diag: 'S→O' },
+    ROLLER: { name: 'ROLLER', role: 'Transport',   drive: '+T', diag: 'O→N' },
+    KASSE:  { name: 'KASSE',  role: 'Abschluss',   drive: '+T', diag: 'N→W' }
+};
 
-<h2>TIME_PIPELINE – Live Engine</h2>
-<pre id="pipeline">Starte TIME_PIPELINE…</pre>
+// --- RIZ (-T) ---
+var RIZ = {
+    DOOR:  { name: 'DOOR',  role: 'Öffnung',        drive: '-T', diag: 'W→S' },
+    DOO:   { name: 'DOO',   role: 'Abfluss',        drive: '-T', diag: 'S→S' },
+    SHELL: { name: 'SHELL', role: 'Stabilisierung', drive: '-T', diag: 'S→W' }
+};
 
-<script>
-// Beispiel-Stationen für TIME_PIPELINE
-const stations = [
-    { zugriff: 80, speed: 70, transfer: 60, zuver: 90 },
-    { zugriff: 40, speed: 30, transfer: 50, zuver: 20 }
-];
+// --- GEO MODULAR ---
+var GEO = {
+    TO:  { name: 'TΩ',  desc: 'Zeit-Fusion' },
+    XU:  { name: 'XU',  desc: 'Zeit-Achsen' },
+    PHI4:{ name: 'Φ4',  desc: 'Zeit-Familien' },
+    O12: { name: 'O12', desc: '12D-Zeit-Fusion' }
+};
 
-try {
-    const result = TIME_PIPELINE(stations);
-    document.getElementById("pipeline").innerText =
-        JSON.stringify(result, null, 4);
-} catch(e){
-    document.getElementById("pipeline").innerText =
-        "Fehler in TIME_PIPELINE: " + e;
+// --- TEM6D ---
+var T6D = {
+    t: [0, 0, 0],
+    flow: function(alt, ghost, real) {
+        var e = 0.000001;
+        this.t[0] += alt * e;
+        this.t[1] += ghost * e;
+        this.t[2] += real * e;
+        return this.t;
+    },
+    project: function() {
+        return this.t[2];
+    }
+};
+
+// ============================================================
+// CANVAS SETUP
+// ============================================================
+var canvas = document.getElementById('temCanvas');
+var ctx = canvas.getContext('2d');
+var W, H, cx, cy, radius;
+
+function resizeCanvas() {
+    var wrap = document.getElementById('canvas-wrap');
+    var rect = wrap.getBoundingClientRect();
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+    W = canvas.width; H = canvas.height;
+    cx = W / 2; cy = H / 2;
+    radius = Math.min(W, H) * 0.38;
 }
-</script>
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
 
+// ============================================================
+// STATE
+// ============================================================
+var state = {
+    running: false,
+    autoMode: false,
+    cycle: 0,
+    t: 0,
+    activeMod: 'TET',
+    tetCount: 0,
+    rizCount: 0,
+    geoCount: 0,
+    temCount: 0,
+    timeVector: [0, 0, 0]
+};
+
+// ============================================================
+// LOG
+// ============================================================
+function log(msg, type) {
+    var logDiv = document.getElementById('log');
+    var entry = document.createElement('div');
+    entry.className = 'entry';
+    var time = new Date().toLocaleTimeString();
+    var cls = type === 'tet' ? 'tet' : type === 'riz' ? 'riz' :
+              type === 'geo' ? 'geo' : type === 'tem' ? 'tem' :
+              type === 'zeit' ? 'zeit' : '';
+    entry.innerHTML = '<span class="time">[' + time + ']</span> <span class="msg ' + cls + '">' + msg + '</span>';
+    logDiv.appendChild(entry);
+    logDiv.scrollTop = logDiv.scrollHeight;
+    while (logDiv.children.length > 50) logDiv.removeChild(logDiv.firstChild);
+}
+
+// ============================================================
+// KERN-FUNKTIONEN
+// ============================================================
+
+function activateMod(key) {
+    state.activeMod = key;
+    var els = document.querySelectorAll('.mod');
+    for (var i = 0; i < els.length; i++) {
+        var el = els[i];
+        if (el.getAttribute('data-mod') === key) {
+            el.classList.add('active');
+        } else {
+            el.classList.remove('active');
+        }
+    }
+
+    switch(key) {
+        case 'TET':
+            state.tetCount++;
+            var keys = Object.keys(TET);
+            var k = keys[state.tetCount % keys.length];
+            var m = TET[k];
+            log('▶ TET: ' + m.name + ' · ' + m.role + ' · ' + m.drive, 'tet');
+            document.getElementById('tet-value').textContent = state.tetCount;
+            T6D.flow(1, 0, 0);
+            break;
+        case 'RIZ':
+            state.rizCount++;
+            var keys = Object.keys(RIZ);
+            var k = keys[state.rizCount % keys.length];
+            var m = RIZ[k];
+            log('◀ RIZ: ' + m.name + ' · ' + m.role + ' · ' + m.drive, 'riz');
+            document.getElementById('riz-value').textContent = state.rizCount;
+            T6D.flow(0, 1, 0);
+            break;
+        case 'GEO':
+            state.geoCount++;
+            var keys = Object.keys(GEO);
+            var k = keys[state.geoCount % keys.length];
+            var m = GEO[k];
+            log('🌐 GEO: ' + m.name + ' · ' + m.desc, 'geo');
+            document.getElementById('geo-value').textContent = state.geoCount;
+            T6D.flow(0, 0, 1);
+            break;
+    }
+    state.temCount = state.tetCount + state.rizCount + state.geoCount;
+    document.getElementById('tem-value').textContent = state.temCount;
+}
+
+function temStep() {
+    // TEM fließt durch TET → RIZ → GEO
+    if (state.cycle % 3 === 0) activateMod('TET');
+    if (state.cycle % 3 === 1) activateMod('RIZ');
+    if (state.cycle % 3 === 2) activateMod('GEO');
+
+    // Zeitvektor
+    state.timeVector = T6D.t;
+}
+
+// ============================================================
+// RENDER
+// ============================================================
+function render() {
+    ctx.clearRect(0, 0, W, H);
+
+    var grad = ctx.createRadialGradient(cx, cy, 10, cx, cy, W * 0.6);
+    grad.addColorStop(0, '#0a0a1a');
+    grad.addColorStop(1, '#000');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+
+    drawTemRing();
+    drawTET();
+    drawRIZ();
+    drawGEO();
+    drawTimeVector();
+
+    state.t += 0.008;
+    if (state.running) {
+        state.cycle++;
+        temStep();
+        document.getElementById('cycle-display').textContent = 'ZEIT ' + state.cycle;
+    }
+
+    requestAnimationFrame(render);
+}
+render();
+
+// ============================================================
+// ZEICHEN-FUNKTIONEN
+// ============================================================
+
+function drawTemRing() {
+    var r = radius * 0.75;
+
+    ctx.strokeStyle = 'rgba(255,215,61,0.03)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 8]);
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Zeit-Punkte
+    for (var i = 0; i < 12; i++) {
+        var angle = (i / 12) * Math.PI * 2 + state.t * 0.02;
+        var dist = r * (0.85 + Math.sin(state.t + i * 0.5) * 0.03);
+        var x = cx + Math.cos(angle) * dist;
+        var y = cy + Math.sin(angle) * dist;
+        ctx.fillStyle = 'rgba(68,255,255,0.02)';
+        ctx.beginPath();
+        ctx.arc(x, y, 1 + Math.sin(state.t + i) * 0.3, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    ctx.fillStyle = 'rgba(68,255,255,0.03)';
+    ctx.font = '6px Consolas';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'bottom';
+    ctx.fillText('⏳ TEM · ZEIT ROOT', cx, cy - r * 0.85);
+}
+
+function drawTET() {
+    var r = radius * 0.25;
+    var angle = state.t * 0.05 + 0.5;
+    var colors = ['#6bff6b', '#4f4', '#2a2'];
+    var labels = ['ESSO', 'ROLLER', 'KASSE'];
+
+    for (var i = 0; i < 3; i++) {
+        var a = angle + (i / 3) * Math.PI * 2;
+        var x = cx + Math.cos(a) * r * 0.7;
+        var y = cy + Math.sin(a) * r * 0.7;
+        ctx.fillStyle = colors[i] + '44';
+        ctx.shadowColor = colors[i];
+        ctx.shadowBlur = 6;
+        ctx.beginPath();
+        ctx.arc(x, y, 6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = colors[i];
+        ctx.font = '4px Consolas';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+        ctx.fillText(labels[i], x, y - 8);
+    }
+
+    ctx.fillStyle = 'rgba(107,255,107,0.05)';
+    ctx.font = '4px Consolas';
+    ctx.textBaseline = 'top';
+    ctx.fillText('▶ TET (+T)', cx - 16, cy + r + 10);
+}
+
+function drawRIZ() {
+    var r = radius * 0.4;
+    var angle = state.t * 0.04;
+    var colors = ['#ffd93d', '#ff8c00', '#ff6b00'];
+    var labels = ['DOOR', 'DOO', 'SHELL'];
+
+    for (var i = 0; i < 3; i++) {
+        var a = angle + (i / 3) * Math.PI * 2 + 0.5;
+        var x = cx + Math.cos(a) * r * 0.7;
+        var y = cy + Math.sin(a) * r * 0.7;
+        ctx.fillStyle = colors[i] + '44';
+        ctx.shadowColor = colors[i];
+        ctx.shadowBlur = 6;
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = colors[i];
+        ctx.font = '4px Consolas';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+        ctx.fillText(labels[i], x, y + 8);
+    }
+
+    ctx.fillStyle = 'rgba(255,215,61,0.05)';
+    ctx.font = '4px Consolas';
+    ctx.textBaseline = 'top';
+    ctx.fillText('◀ RIZ (-T)', cx - 16, cy + r + 10);
+}
+
+function drawGEO() {
+    var r = radius * 0.55;
+    var angle = state.t * 0.03;
+    var colors = ['#6b6bff', '#4f4f', '#2a2a', '#1a1a'];
+    var labels = ['TΩ', 'XU', 'Φ4', 'O12'];
+
+    for (var i = 0; i < 4; i++) {
+        var a = angle + (i / 4) * Math.PI * 2;
+        var x = cx + Math.cos(a) * r * 0.7;
+        var y = cy + Math.sin(a) * r * 0.7;
+        ctx.fillStyle = colors[i] + '44';
+        ctx.shadowColor = colors[i];
+        ctx.shadowBlur = 6;
+        ctx.beginPath();
+        ctx.arc(x, y, 5, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = colors[i];
+        ctx.font = '4px Consolas';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+        ctx.fillText(labels[i], x, y - 8);
+    }
+
+    ctx.fillStyle = 'rgba(107,107,255,0.05)';
+    ctx.font = '4px Consolas';
+    ctx.textBaseline = 'top';
+    ctx.fillText('🌐 GEO Modular', cx - 20, cy + r + 10);
+}
+
+function drawTimeVector() {
+    var r = radius * 0.08;
+    var tv = state.timeVector;
+    var t = tv[2] || 0;
+
+    ctx.fillStyle = 'rgba(68,255,255,0.1)';
+    ctx.shadowColor = '#4ff';
+    ctx.shadowBlur = 15;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+
+    ctx.fillStyle = '#4ff';
+    ctx.font = 'bold 8px Consolas';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('T', cx, cy);
+
+    ctx.fillStyle = 'rgba(68,255,255,0.05)';
+    ctx.font = '3px Consolas';
+    ctx.textBaseline = 'top';
+    ctx.fillText('TIME', cx, cy + r + 6);
+
+    // Zeitwerte
+    ctx.fillStyle = 'rgba(68,255,255,0.03)';
+    ctx.font = '3px Consolas';
+    ctx.textBaseline = 'bottom';
+    ctx.fillText('ALT:' + tv[0].toFixed(6), cx - 40, cy - r - 10);
+    ctx.fillText('GHOST:' + tv[1].toFixed(6), cx, cy - r - 10);
+    ctx.fillText('REAL:' + tv[2].toFixed(6), cx + 40, cy - r - 10);
+}
+
+// ============================================================
+// CONTROLS
+// ============================================================
+document.getElementById('btn-start').onclick = function() {
+    state.running = !state.running;
+    this.textContent = state.running ? '⏸ STOP' : '▶ START';
+    document.getElementById('state-display').textContent = state.running ? '● läuft' : '● gestoppt';
+    document.getElementById('state-display').style.color = state.running ? 'var(--gold)' : '#666';
+    log(state.running ? '▶ TEM gestartet' : '⏸ TEM gestoppt', 'zeit');
+};
+
+document.getElementById('btn-tet').onclick = function() { activateMod('TET'); };
+document.getElementById('btn-riz').onclick = function() { activateMod('RIZ'); };
+document.getElementById('btn-geo').onclick = function() { activateMod('GEO'); };
+document.getElementById('btn-tem').onclick = function() {
+    state.temCount++;
+    document.getElementById('tem-value').textContent = state.temCount;
+    log('⏳ TEM: ' + state.temCount + ' Zyklen', 'tem');
+};
+
+document.getElementById('btn-reset').onclick = function() {
+    state.running = false;
+    state.cycle = 0;
+    state.t = 0;
+    state.tetCount = 0;
+    state.rizCount = 0;
+    state.geoCount = 0;
+    state.temCount = 0;
+    state.timeVector = [0, 0, 0];
+    T6D.t = [0, 0, 0];
+    document.getElementById('btn-start').textContent = '▶ START';
+    document.getElementById('state-display').textContent = '● reset';
+    document.getElementById('state-display').style.color = '#f44';
+    document.getElementById('cycle-display').textContent = 'ZEIT 0';
+    document.getElementById('tet-value').textContent = '0';
+    document.getElementById('riz-value').textContent = '0';
+    document.getElementById('geo-value').textContent = '0';
+    document.getElementById('tem-value').textContent = '0';
+    var els = document.querySelectorAll('.mod');
+    for (var i = 0; i < els.length; i++) {
+        els[i].classList.remove('active');
+    }
+    document.querySelector('.mod[data-mod="TET"]').classList.add('active');
+    log('⟲ RESET — TEM zurückgesetzt', 'zeit');
+};
+
+document.getElementById('btn-auto').onclick = function() {
+    state.autoMode = !state.autoMode;
+    this.textContent = state.autoMode ? '⏸ PAUSE' : '▶ AUTO';
+    if (state.autoMode) {
+        state.running = true;
+        document.getElementById('btn-start').textContent = '⏸ STOP';
+        document.getElementById('state-display').textContent = '● auto';
+        document.getElementById('state-display').style.color = 'var(--gold)';
+        if (window.autoInterval) clearInterval(window.autoInterval);
+        window.autoInterval = setInterval(function() {
+            var mods = ['TET', 'RIZ', 'GEO'];
+            var idx = Math.floor(Math.random() * mods.length);
+            activateMod(mods[idx]);
+            log('🔄 ' + mods[idx] + ' · ZEIT ' + state.cycle, 'zeit');
+        }, 3000);
+        log('▶ AUTO · TEM fließt', 'zeit');
+    } else {
+        clearInterval(window.autoInterval);
+        log('⏸ AUTO pausiert', 'zeit');
+    }
+};
+
+// ============================================================
+// MOD-KLICKS
+// ============================================================
+var modEls = document.querySelectorAll('.mod');
+for (var i = 0; i < modEls.length; i++) {
+    modEls[i].onclick = function() {
+        var key = this.getAttribute('data-mod');
+        activateMod(key);
+    };
+}
+
+// ============================================================
+// TASTATUR
+// ============================================================
+document.addEventListener('keydown', function(e) {
+    if (e.key === ' ') { e.preventDefault(); document.getElementById('btn-start').click(); }
+    if (e.key === '1') activateMod('TET');
+    if (e.key === '2') activateMod('RIZ');
+    if (e.key === '3') activateMod('GEO');
+    if (e.key === '4') document.getElementById('btn-tem').click();
+    if (e.key === 'x') document.getElementById('btn-reset').click();
+    if (e.key === 'a') document.getElementById('btn-auto').click();
+});
+
+// ============================================================
+// UHR
+// ============================================================
+function updateClock() {
+    document.getElementById('clock').textContent = '⏱️ ' + new Date().toLocaleTimeString();
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// ============================================================
+// INIT
+// ============================================================
+log('⏳ TEM · Zeit Root · GEO Modular · 6E', 'zeit');
+log('▶ TET (+T): ESSO · ROLLER · KASSE', 'tet');
+log('◀ RIZ (-T): DOOR · DOO · SHELL', 'riz');
+log('🌐 GEO: TΩ · XU · Φ4 · O12', 'geo');
+log('⌨️  1=TET 2=RIZ 3=GEO 4=TEM  x=Reset  a=Auto', 'zeit');
+
+setTimeout(function() {
+    state.running = true;
+    document.getElementById('btn-start').textContent = '⏸ STOP';
+    document.getElementById('state-display').textContent = '● läuft';
+    document.getElementById('state-display').style.color = 'var(--gold)';
+    log('▶ TEM automatisch gestartet · ⏳', 'zeit');
+}, 500);
+</script>
 </body>
 </html>
