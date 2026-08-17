@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>TEM – Zeit Root</title>
+<title>TEM – Zeit Root (Modular GEO + 6E Engine)</title>
 
 <style>
 body { background:#000; color:#0f0; font-family:Consolas, monospace; padding:20px; }
@@ -13,20 +13,58 @@ pre { background:#111; padding:12px; border:1px solid #333; }
 #hh-panel { margin-top:20px; padding:12px; border:1px solid #333; }
 </style>
 
-<!-- Routing + Auto-Erkennung laden -->
+<!-- Routing -->
 <script src="routing.js"></script>
+
+<!-- TEM6D Engine -->
+<script src="TEM6D.matrix.js"></script>
+<script src="TEM6D.root.js"></script>
+<script src="tic.js"></script>
+
+<!-- SYS Analyse -->
+<script src="SYS.station.analyze.js"></script>
 
 </head>
 <body>
 
-<h1>TEM – Zeit Root</h1>
+<h1>TEM – Zeit Root (Modular)</h1>
 <p>TEM = Zeit‑Engine des 3hit90‑Systems</p>
 
 <hr>
 
-<h2>System‑Module</h2>
+<h2>Root‑Quadranten</h2>
 <a href="https://iki1uc.github.io/3hit90/index.html">SYS.index</a>
+<a href="ID.html">ID Root</a>
+<a href="plus/minus(sys(tem)+/-).html">OP Root</a>
 <a href="TEM.id.json">TEM.id.json</a>
+
+<hr>
+
+<h2>GEO – Modular</h2>
+<pre>
+TΩ  = Zeit‑Fusion
+XU  = Zeit‑Achsen
+Φ4  = Zeit‑Familien
+O12 = 12D‑Zeit‑Fusion
+</pre>
+
+<hr>
+
+<h2>TEM – 6E Zeit‑Bewegung</h2>
+<pre>
+TET (+T):
+  ESSO   – Startimpuls
+  ROLLER – Transport
+  KASSE  – Abschluss
+
+RIZ (−T):
+  DOOR   – Öffnung
+  DOO    – Abfluss
+  SHELL  – Stabilisierung
+
+TEM6 = TET3 + RIZ3
+(((SYS3))) TEM6 (((SYS9)))
+</pre>
 
 <hr>
 
@@ -35,7 +73,7 @@ pre { background:#111; padding:12px; border:1px solid #333; }
 
 <hr>
 
-<h2>System Info</h2>
+<h2>TEM Info</h2>
 <pre id="tem-info">Lade TEM Daten…</pre>
 
 <script>
@@ -50,6 +88,28 @@ fetch("TEM.id.json")
         document.getElementById("tem-info").innerText =
             "Fehler: TEM.id.json konnte nicht geladen werden.";
     });
+</script>
+
+<hr>
+
+<h2>TIME_PIPELINE – Live Engine</h2>
+<pre id="pipeline">Starte TIME_PIPELINE…</pre>
+
+<script>
+// Beispiel-Stationen für TIME_PIPELINE
+const stations = [
+    { zugriff: 80, speed: 70, transfer: 60, zuver: 90 },
+    { zugriff: 40, speed: 30, transfer: 50, zuver: 20 }
+];
+
+try {
+    const result = TIME_PIPELINE(stations);
+    document.getElementById("pipeline").innerText =
+        JSON.stringify(result, null, 4);
+} catch(e){
+    document.getElementById("pipeline").innerText =
+        "Fehler in TIME_PIPELINE: " + e;
+}
 </script>
 
 </body>
