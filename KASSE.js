@@ -8,4 +8,3 @@ export const KASSE = {
     diag: "N→W",
     status: "aktiv"
 };
-
